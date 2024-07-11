@@ -1,4 +1,6 @@
-﻿namespace ExerciseLists;
+﻿using System.Globalization;
+
+namespace ExerciseLists;
 
 class Program
 {
@@ -43,7 +45,7 @@ class Program
             Console.WriteLine("-----------------------------");
             Console.WriteLine("Choose an option:");
             Console.WriteLine("1 - List employees");
-            Console.WriteLine("2 - Edit a salary");
+            Console.WriteLine("2 - Increase a salary");
             Console.WriteLine("-----------------------------");
             Console.Write("Opção: ");
 
@@ -59,10 +61,23 @@ class Program
                         Console.WriteLine("-----------------------------");
                         Console.WriteLine($"Id: {employeeData.Id}");
                         Console.WriteLine($"Name: {employeeData.Name}");
-                        Console.WriteLine($"Salary: {employeeData.Salary}");
+                        Console.WriteLine($"Salary: R${employeeData.Salary.ToString("F2", CultureInfo.InvariantCulture)}");
                     }
                     break;
                 case 2:
+                    Console.Write("Write which employee do you want to increase a salary: ");
+                    int employeeId = int.Parse(Console.ReadLine());
+                    
+                    Employee ?selectedEmployee = employees.Find(x => x.Id == employeeId) ?? null;
+
+                    if (selectedEmployee != null)
+                    {
+                        Console.Write("How many do you want to increase: ");
+                        double valueToIncrease = double.Parse(Console.ReadLine());
+                    
+                        selectedEmployee.IncreaseSalary(valueToIncrease);
+                    }
+                   
                     break;
                 default:
                     return;

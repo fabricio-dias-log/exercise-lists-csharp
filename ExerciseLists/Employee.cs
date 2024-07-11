@@ -18,6 +18,11 @@ public class Employee
         Salary = SetSalary(salary);
     }
 
+    public void IncreaseSalary(double qti)
+    {
+        Salary += qti;
+    }
+
     private double SetSalary(double value)
     {
         return value;
